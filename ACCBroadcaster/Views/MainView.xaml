@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="ACCBroadcaster.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACCBroadcaster.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="32">ACC Broadcaster</TextBlock>
+            <TextBox Name="IP" Header="IP" Text="127.0.0.1"></TextBox>
+            <NumberBox Name="Port" Header="Port" Value="9000"></NumberBox>
+            <TextBox Name="DisplayName" Header="Display Name" Text="Your name"></TextBox>
+            <PasswordBox Name="ConnectionPW" Header="Connection password" Password="asd"></PasswordBox>
+            <NumberBox Name="UpdateInterval" Header="Update interval (ms)" Value="250"></NumberBox>
+            <PasswordBox Name="CommandPW" Header="Command password" Password=""></PasswordBox>
+            <Button x:Name="myButton" Click="myButton_Click">Connect</Button>
+        </StackPanel>
+    </Grid>
+</Page>
