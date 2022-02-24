@@ -1,5 +1,6 @@
 ﻿<Page
     x:Class="ACCBroadcaster.Views.Broadcasting.BroadcastingView"
+    xmlns:Broadcasting="using:ACCBroadcaster.Views.Broadcasting"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ACCBroadcaster.Views.Broadcasting"
@@ -9,6 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Name="TextBlock1">Broadcasting View</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Broadcasting:CarListView Grid.Column="0"></Broadcasting:CarListView>
+        <TextBlock Grid.Column="1">Text</TextBlock>
     </Grid>
 </Page>

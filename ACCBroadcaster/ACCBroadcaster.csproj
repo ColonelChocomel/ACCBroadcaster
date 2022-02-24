@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\Broadcasting\BroadcastingView.xaml" />
+    <None Remove="Views\Broadcasting\CarListView.xaml" />
     <None Remove="Views\MainView.xaml" />
   </ItemGroup>
 
@@ -41,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\Program Files (x86)\Steam\steamapps\common\Assetto Corsa Competizione Dedicated Server\sdk\broadcasting\Sources\ksBroadcastingNetwork\ksBroadcastingNetwork.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Broadcasting\CarListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\MainView.xaml">
