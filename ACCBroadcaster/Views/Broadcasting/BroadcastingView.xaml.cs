@@ -27,8 +27,6 @@ namespace ACCBroadcaster.Views.Broadcasting
         public BroadcastingView()
         {
             this.InitializeComponent();
-            //TextBlock1.Text = ACCService.client.MessageHandler.TrackMeters.ToString();
-            //ACCService.client.MessageHandler.RequestHUDPage("Broadcasting");
         }
     }
 }

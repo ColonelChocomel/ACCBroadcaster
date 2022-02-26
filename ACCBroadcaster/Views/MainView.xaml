@@ -18,6 +18,7 @@
             <NumberBox Name="UpdateInterval" Header="Update interval (ms)" Value="250"></NumberBox>
             <PasswordBox Name="CommandPW" Header="Command password" Password=""></PasswordBox>
             <Button x:Name="myButton" Click="myButton_Click">Connect</Button>
+            <TextBlock Name="ErrorTextBlock"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

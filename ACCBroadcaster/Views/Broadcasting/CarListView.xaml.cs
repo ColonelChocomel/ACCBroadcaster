@@ -27,31 +27,41 @@ namespace ACCBroadcaster.Views.Broadcasting
     /// </summary>
     public sealed partial class CarListView : Page
     {
-        private List<Car> Cars;
+        private ObservableCollection<Car> Cars = new ObservableCollection<Car>();
         public CarListView()
         {
             this.InitializeComponent();
-            this.Cars = new List<Car>();
-            Car car = new Car();
-            car.Position = 0;
-            car.RaceNumber = 123;
-            car.DriverName = "Driver Name";
-            car.Location = CarLocationEnum.Track;
-            car.LapDelta = "-0.123";
-            car.BestLap = "1:23.456";
-            car.CurrentLap = "1:23.456";
-            car.LastLap = "1:23.456";
-            this.Cars.Add(car);
-            car = new Car();
-            car.Position = 1;
-            car.RaceNumber = 133;
-            car.DriverName = "Driver not Name";
-            car.Location = CarLocationEnum.Track;
-            car.LapDelta = "-0.123";
-            car.BestLap = "1:23.456";
-            car.CurrentLap = "1:23.456";
-            car.LastLap = "1:23.456";
-            this.Cars.Add(car);
+            ACCService.Client.MessageHandler.OnEntrylistUpdate += OnEntrylistUpdate;
+            ACCService.Client.MessageHandler.OnRealtimeCarUpdate += OnRealtimeCarUpdate;
+        }
+
+        private void OnEntrylistUpdate(string sender, CarInfo carUpdate)
+        {
+            Car car = new Car
+            {
+                Index = carUpdate.CarIndex,
+                RaceNumber = carUpdate.RaceNumber,
+                DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
+                Location = CarLocationEnum.Pitlane,
+            };
+            Cars.Add(car);
+        }
+
+        private void OnRealtimeCarUpdate(string sender, RealtimeCarUpdate carUpdate)
+        {
+            Car car = Cars.FirstOrDefault(x => x.Index == carUpdate.CarIndex);
+            if (car != null)
+            {
+                car.Index = carUpdate.CarIndex;
+                car.Position = carUpdate.Position;
+                car.Location = carUpdate.CarLocation;
+                car.LapDelta =car.DeltaMsToReadable(carUpdate.Delta);
+                car.CurrentLap = car.LapTimeMsToReadable(carUpdate.CurrentLap.LaptimeMS);
+                car.LastLap = car.LapTimeMsToReadable(carUpdate.LastLap.LaptimeMS);
+                car.BestLap = car.LapTimeMsToReadable(carUpdate.BestSessionLap.LaptimeMS);
+                Cars = new ObservableCollection<Car>(Cars.OrderBy(x => x.Position));
+                CarLV.ItemsSource = Cars;
+            }
         }
     }
 }

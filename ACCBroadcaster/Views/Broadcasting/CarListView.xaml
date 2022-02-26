@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ACCBroadcaster.Views.Broadcasting"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:scm="using:System.ComponentModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:classes="using:ACCBroadcaster.Classes"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -15,32 +16,34 @@
         </Style>
     </Page.Resources>
 
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource TextStyle}" Width="40">Pos</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="40">#</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="250">Driver</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="85">Location</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="93">Lap Delta</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="84">Current</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="84">Last</TextBlock>
-            <TextBlock Style="{StaticResource TextStyle}" Width="84">Best</TextBlock>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TextStyle}" Width="40">Pos</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="40">#</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="250">Driver</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="85">Location</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="93">Lap Delta</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="100">Current</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="100">Last</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="100">Best</TextBlock>
+            </StackPanel>
+            <ItemsControl Name="CarLV" ItemsSource="{x:Bind Cars}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="classes:Car">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{x:Bind Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="40"/>
+                            <TextBlock Text="{x:Bind RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
+                            <TextBlock Text="{x:Bind DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>
+                            <TextBlock Text="{x:Bind Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="85"/>
+                            <TextBlock Text="{x:Bind LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="93"/>
+                            <TextBlock Text="{x:Bind CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                            <TextBlock Text="{x:Bind LastLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                            <TextBlock Text="{x:Bind BestLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
-        <ItemsControl Name="CarLV" ItemsSource="{x:Bind Cars}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="classes:Car">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind Position}" Style="{StaticResource TextStyle}" Width="40"/>
-                        <TextBlock Text="{x:Bind RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
-                        <TextBlock Text="{x:Bind DriverName}" Style="{StaticResource TextStyle}" Width="250"/>
-                        <TextBlock Text="{x:Bind Location}" Style="{StaticResource TextStyle}" Width="85"/>
-                        <TextBlock Text="{x:Bind LapDelta}" Style="{StaticResource TextStyle}" Width="93"/>
-                        <TextBlock Text="{x:Bind CurrentLap}" Style="{StaticResource TextStyle}" Width="84"/>
-                        <TextBlock Text="{x:Bind LastLap}" Style="{StaticResource TextStyle}" Width="84"/>
-                        <TextBlock Text="{x:Bind BestLap}" Style="{StaticResource TextStyle}" Width="84"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+    </ScrollViewer>
 </Page>

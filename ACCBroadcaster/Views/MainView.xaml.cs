@@ -40,13 +40,19 @@ namespace ACCBroadcaster.Views
             string connectionPw = ConnectionPW.Password;
             string commandPw = CommandPW.Password;
             int updateInterval = (int)UpdateInterval.Value;
-            ACCService.client = new ACCUdpRemoteClient(ip, port, displayName, connectionPw, commandPw, updateInterval);
-            ACCService.client.MessageHandler.OnTrackDataUpdate += OnConnect;
+            ACCService.Client = new ACCUdpRemoteClient(ip, port, displayName, connectionPw, commandPw, updateInterval);
+            ACCService.Client.MessageHandler.OnConnectionStateChanged += OnConnect;
         }
 
-        private void OnConnect(string sender, TrackData trackUpdate)
+        private void OnConnect(int connectionId, bool connectionSuccess, bool isReadonly, string error)
         {
-            Frame.Navigate(typeof(BroadcastingView));
+            if (connectionSuccess)
+            {
+                Frame.Navigate(typeof(BroadcastingView));
+            } else
+            {
+                ErrorTextBlock.Text = error;
+            }
         }
     }
 }

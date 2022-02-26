@@ -61,7 +61,7 @@ namespace ACCBroadcaster
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(BroadcastingView), e.Arguments);
+                rootFrame.Navigate(typeof(MainView), e.Arguments);
             }
             m_window.Title = "ACC Broadcaster";
             m_window.Activate();
