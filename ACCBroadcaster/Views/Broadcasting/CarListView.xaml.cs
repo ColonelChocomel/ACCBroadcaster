@@ -123,5 +123,12 @@ namespace ACCBroadcaster.Views.Broadcasting
                 }
             }
         }
+
+        private void OnCarClicked(object sender, TappedRoutedEventArgs e)
+        {
+            TextBlock textBlock = (TextBlock)e.OriginalSource;
+            Car car = (Car)textBlock.DataContext;
+            ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index);
+        }
     }
 }

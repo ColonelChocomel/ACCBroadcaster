@@ -28,7 +28,7 @@
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Last</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Best</TextBlock>
             </StackPanel>
-            <ItemsControl Name="CarLV" ItemsSource="{x:Bind Cars}">
+            <ItemsControl Name="CarLV" ItemsSource="{x:Bind Cars}" IsTapEnabled="True" Tapped="OnCarClicked">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="classes:Car">
                         <StackPanel Orientation="Horizontal" Background="{x:Bind BackgroundBrush, Mode=OneWay}">
