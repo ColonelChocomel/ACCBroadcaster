@@ -33,6 +33,7 @@ namespace ACCBroadcaster.Views.Broadcasting
             this.InitializeComponent();
             ACCService.Client.MessageHandler.OnEntrylistUpdate += OnEntrylistUpdate;
             ACCService.Client.MessageHandler.OnRealtimeCarUpdate += OnRealtimeCarUpdate;
+            ACCService.Client.MessageHandler.OnRealtimeUpdate += OnRealtimeUpdate;
         }
 
         private void OnEntrylistUpdate(string sender, CarInfo carUpdate)
@@ -99,6 +100,26 @@ namespace ACCBroadcaster.Views.Broadcasting
                         listedCar.DestroyPropertyChanged();
                     }
                     CarLV.ItemsSource = Cars;
+                }
+            }
+        }
+
+        private void OnRealtimeUpdate(string sender, RealtimeUpdate update)
+        {
+            Car focusedCar = Cars.FirstOrDefault(x => x.Index == update.FocusedCarIndex);
+            if (focusedCar != null)
+            {
+                Car previousFocusedCar = Cars.FirstOrDefault(x => x.IsFocused);
+                if (previousFocusedCar != null)
+                {
+                    if (previousFocusedCar.Index != focusedCar.Index)
+                    {
+                        focusedCar.SetAsFocusedCar(true);
+                        previousFocusedCar.SetAsFocusedCar(false);
+                    }
+                } else
+                {
+                    focusedCar.SetAsFocusedCar(true);
                 }
             }
         }

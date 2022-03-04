@@ -1,4 +1,5 @@
 ﻿using ksBroadcastingNetwork;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,6 +84,39 @@ namespace ACCBroadcaster.Classes
             }
         }
 
+        private SolidColorBrush _ForegroundBrush = new SolidColorBrush(Microsoft.UI.Colors.White);
+        public SolidColorBrush ForegroundBrush
+        {
+            get { return _ForegroundBrush; }
+            set
+            {
+                _ForegroundBrush = value;
+                OnPropertyChanged(nameof(ForegroundBrush));
+            }
+        }
+
+        private SolidColorBrush _BackgroundBrush;
+        public SolidColorBrush BackgroundBrush
+        {
+            get { return _BackgroundBrush; }
+            set
+            {
+                _BackgroundBrush = value;
+                OnPropertyChanged(nameof(BackgroundBrush));
+            }
+        }
+
+        private bool _IsFocused = false;
+        public bool IsFocused
+        {
+            get { return _IsFocused; }
+            set
+            {
+                _IsFocused = value;
+                OnPropertyChanged(nameof(IsFocused));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -107,6 +141,18 @@ namespace ACCBroadcaster.Classes
         public string DeltaMsToReadable(int deltaMs)
         {
             return $"{TimeSpan.FromMilliseconds(deltaMs):ss\\.f}";
+        }
+
+        public void SetAsFocusedCar(bool isFocused)
+        {
+            IsFocused = isFocused;
+            if (isFocused)
+            {
+                BackgroundBrush = new SolidColorBrush(Microsoft.UI.Colors.Red);
+            } else
+            {
+                BackgroundBrush = null;
+            }
         }
     }
 }
