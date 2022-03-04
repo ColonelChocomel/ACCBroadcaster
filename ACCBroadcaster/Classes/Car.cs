@@ -91,6 +91,11 @@ namespace ACCBroadcaster.Classes
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public void DestroyPropertyChanged()
+        {
+            PropertyChanged = null;
+        }
+
         public string LapTimeMsToReadable(int? laptimeMs)
         {
             if (laptimeMs == null)

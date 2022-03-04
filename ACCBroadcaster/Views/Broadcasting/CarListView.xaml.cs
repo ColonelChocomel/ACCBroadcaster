@@ -37,14 +37,40 @@ namespace ACCBroadcaster.Views.Broadcasting
 
         private void OnEntrylistUpdate(string sender, CarInfo carUpdate)
         {
-            Car car = new Car
+            Car car;
+
+            if (Cars.Count > 0)
             {
-                Index = carUpdate.CarIndex,
-                RaceNumber = carUpdate.RaceNumber,
-                DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
-                Location = CarLocationEnum.Pitlane,
-            };
-            Cars.Add(car);
+                car = Cars.FirstOrDefault(x => x.Index == carUpdate.CarIndex);
+                if (car == null)
+                {
+                    car = new Car
+                    {
+                        Index = carUpdate.CarIndex,
+                        RaceNumber = carUpdate.RaceNumber,
+                        DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
+                        Location = CarLocationEnum.Pitlane,
+                    };
+                    Cars.Add(car);
+                }
+                else
+                {
+                    car.RaceNumber = carUpdate.RaceNumber;
+                    car.DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName;
+                    car.Location = CarLocationEnum.Pitlane;
+                }
+            }
+            else
+            {
+                car = new Car
+                {
+                    Index = carUpdate.CarIndex,
+                    RaceNumber = carUpdate.RaceNumber,
+                    DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
+                    Location = CarLocationEnum.Pitlane,
+                };
+                Cars.Add(car);
+            }
         }
 
         private void OnRealtimeCarUpdate(string sender, RealtimeCarUpdate carUpdate)
@@ -52,15 +78,28 @@ namespace ACCBroadcaster.Views.Broadcasting
             Car car = Cars.FirstOrDefault(x => x.Index == carUpdate.CarIndex);
             if (car != null)
             {
+                bool positionChanged = false;
                 car.Index = carUpdate.CarIndex;
-                car.Position = carUpdate.Position;
+                if (car.Position != carUpdate.Position)
+                {
+                    car.Position = carUpdate.Position;
+                    positionChanged = true;
+                }
                 car.Location = carUpdate.CarLocation;
-                car.LapDelta =car.DeltaMsToReadable(carUpdate.Delta);
+                car.LapDelta = car.DeltaMsToReadable(carUpdate.Delta);
                 car.CurrentLap = car.LapTimeMsToReadable(carUpdate.CurrentLap.LaptimeMS);
                 car.LastLap = car.LapTimeMsToReadable(carUpdate.LastLap.LaptimeMS);
                 car.BestLap = car.LapTimeMsToReadable(carUpdate.BestSessionLap.LaptimeMS);
-                Cars = new ObservableCollection<Car>(Cars.OrderBy(x => x.Position));
-                CarLV.ItemsSource = Cars;
+                if (positionChanged)
+                {
+                    Cars = new ObservableCollection<Car>(Cars.OrderBy(x => x.Position));
+                    foreach(Car listedCar in CarLV.Items)
+                    {
+                        // Destroy PropertyChanged on all instances in view list to stop memory clogging up
+                        listedCar.DestroyPropertyChanged();
+                    }
+                    CarLV.ItemsSource = Cars;
+                }
             }
         }
     }
