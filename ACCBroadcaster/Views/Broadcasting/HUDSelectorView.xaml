@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="ACCBroadcaster.Views.Broadcasting.HUDSelectorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACCBroadcaster.Views.Broadcasting"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:classes="using:ACCBroadcaster.Classes"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5">
+        <TextBlock FontSize="15" FontWeight="Bold">HUD Pages</TextBlock>
+        <ItemsControl Name="HudLV" ItemsSource="{x:Bind hudOptions}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="5"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="classes:HUDOption">
+                    <Button Name="{x:Bind InternalName}" Background="{x:Bind BackgroundBrush, Mode=OneWay}" Click="OnClick" Content="{x:Bind DisplayName}" Margin="5"></Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -28,18 +28,18 @@
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Last</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Best</TextBlock>
             </StackPanel>
-            <ItemsControl Name="CarLV" ItemsSource="{x:Bind Cars}" IsTapEnabled="True" Tapped="OnCarClicked">
+            <ItemsControl Name="CarLV" ItemsSource="{Binding Cars}" IsTapEnabled="True" Tapped="OnCarClicked">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="classes:Car">
-                        <StackPanel Orientation="Horizontal" Background="{x:Bind BackgroundBrush, Mode=OneWay}">
-                            <TextBlock Text="{x:Bind Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="40"/>
-                            <TextBlock Text="{x:Bind RaceNumber}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="40"/>
-                            <TextBlock Text="{x:Bind DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="250"/>
-                            <TextBlock Text="{x:Bind Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="85"/>
-                            <TextBlock Text="{x:Bind LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="93"/>
-                            <TextBlock Text="{x:Bind CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="100"/>
-                            <TextBlock Text="{x:Bind LastLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="100"/>
-                            <TextBlock Text="{x:Bind BestLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{x:Bind ForegroundBrush, Mode=OneWay}" Width="100"/>
+                        <StackPanel Orientation="Horizontal" Background="{Binding BackgroundBrush, Mode=OneWay}">
+                            <TextBlock Text="{Binding Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="40"/>
+                            <TextBlock Text="{Binding RaceNumber}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="40"/>
+                            <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="250"/>
+                            <TextBlock Text="{Binding Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="85"/>
+                            <TextBlock Text="{Binding LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="93"/>
+                            <TextBlock Text="{Binding CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="100"/>
+                            <TextBlock Text="{Binding LastLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="100"/>
+                            <TextBlock Text="{Binding BestLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding ForegroundBrush, Mode=OneWay}" Width="100"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

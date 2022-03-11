@@ -14,6 +14,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using ksBroadcastingNetwork;
 using ACCBroadcaster.Views.Broadcasting;
+using ACCBroadcaster.Classes;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,6 +29,12 @@ namespace ACCBroadcaster
         public MainWindow()
         {
             this.InitializeComponent();
+        }
+
+        private void Window_Closed(object sender, WindowEventArgs args)
+        {
+            if (ACCService.Client != null)
+            ACCService.Client.Shutdown();
         }
     }
 }

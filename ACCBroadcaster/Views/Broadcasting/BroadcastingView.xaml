@@ -15,6 +15,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Broadcasting:CarListView Grid.Column="0"></Broadcasting:CarListView>
-        <TextBlock Grid.Column="1">Text</TextBlock>
+        <Broadcasting:HUDSelectorView Grid.Column="1"></Broadcasting:HUDSelectorView>
     </Grid>
 </Page>
