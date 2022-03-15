@@ -13,6 +13,7 @@ namespace ACCBroadcaster.Classes
     {
         public int Index { get; set; }
         private int _Position;
+
         public int Position 
         {
             get { return _Position; }
@@ -22,7 +23,9 @@ namespace ACCBroadcaster.Classes
                 OnPropertyChanged(nameof(Position));
             }
         }
+
         public int RaceNumber { get; set; }
+
         private string _DriverName;
         public string DriverName
         {
@@ -33,6 +36,7 @@ namespace ACCBroadcaster.Classes
                 OnPropertyChanged(nameof(DriverName));
             }
         }
+
         private CarLocationEnum _Location;
         public CarLocationEnum Location
         {
@@ -43,6 +47,7 @@ namespace ACCBroadcaster.Classes
                 OnPropertyChanged(nameof(Location));
             }
         }
+
         private string _LapDelta;
         public string LapDelta
         {
@@ -53,6 +58,18 @@ namespace ACCBroadcaster.Classes
                 OnPropertyChanged(nameof(LapDelta));
             }
         }
+
+        private string _PositionDelta;
+        public string PositionDelta
+        {
+            get { return _PositionDelta; }
+            set
+            {
+                _PositionDelta = value;
+                OnPropertyChanged(nameof(PositionDelta));
+            }
+        }
+
         private string _CurrentLap;
         public string CurrentLap
         {
@@ -63,6 +80,7 @@ namespace ACCBroadcaster.Classes
                 OnPropertyChanged(nameof(CurrentLap));
             }
         }
+
         private string _LastLap;
         public string LastLap
         {
@@ -73,6 +91,9 @@ namespace ACCBroadcaster.Classes
                 OnPropertyChanged(nameof(LastLap));
             }
         }
+
+        public int BestLapMS = 0;
+
         private string _BestLap;
         public string BestLap
         {
@@ -84,16 +105,9 @@ namespace ACCBroadcaster.Classes
             }
         }
 
-        private SolidColorBrush _ForegroundBrush = new SolidColorBrush(Microsoft.UI.Colors.White);
-        public SolidColorBrush ForegroundBrush
-        {
-            get { return _ForegroundBrush; }
-            set
-            {
-                _ForegroundBrush = value;
-                OnPropertyChanged(nameof(ForegroundBrush));
-            }
-        }
+        public int Kmh;
+
+        public int Lap;
 
         private SolidColorBrush _BackgroundBrush;
         public SolidColorBrush BackgroundBrush
@@ -114,6 +128,17 @@ namespace ACCBroadcaster.Classes
             {
                 _IsFocused = value;
                 OnPropertyChanged(nameof(IsFocused));
+            }
+        }
+
+        private float _SplinePosition;
+        public float SplinePosition
+        {
+            get { return _SplinePosition; }
+            set
+            {
+                _SplinePosition = value;
+                OnPropertyChanged(nameof(SplinePosition));
             }
         }
 

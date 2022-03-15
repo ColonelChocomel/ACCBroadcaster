@@ -28,6 +28,7 @@ namespace ACCBroadcaster.Views.Broadcasting
     public sealed partial class CarListView : Page
     {
         private ObservableCollection<Car> Cars = new ObservableCollection<Car>();
+        private RaceSessionType SessionType;
         public CarListView()
         {
             this.InitializeComponent();
@@ -91,6 +92,13 @@ namespace ACCBroadcaster.Views.Broadcasting
                 car.CurrentLap = car.LapTimeMsToReadable(carUpdate.CurrentLap.LaptimeMS);
                 car.LastLap = car.LapTimeMsToReadable(carUpdate.LastLap.LaptimeMS);
                 car.BestLap = car.LapTimeMsToReadable(carUpdate.BestSessionLap.LaptimeMS);
+                if (carUpdate.BestSessionLap.LaptimeMS != null)
+                {
+                    car.BestLapMS = (int)carUpdate.BestSessionLap.LaptimeMS;
+                }
+                car.SplinePosition = carUpdate.SplinePosition;
+                car.Kmh = carUpdate.Kmh;
+                car.Lap = carUpdate.Laps;
                 if (positionChanged)
                 {
                     Cars = new ObservableCollection<Car>(Cars.OrderBy(x => x.Position));
@@ -100,6 +108,33 @@ namespace ACCBroadcaster.Views.Broadcasting
                         listedCar.DestroyPropertyChanged();
                     }
                     CarLV.ItemsSource = Cars;
+                }
+                if (car.Position != 1)
+                {
+                    Car carAhead = Cars.FirstOrDefault(x => x.Position == (car.Position - 1));
+                    if (carAhead != null)
+                    {
+                        if (SessionType != RaceSessionType.Race)
+                        {
+                            if (car.BestLapMS > 0)
+                            {
+                                int lapDelta = carAhead.BestLapMS - car.BestLapMS;
+                                car.PositionDelta = car.DeltaMsToReadable(lapDelta);
+                            }
+                        }
+                        else if (carAhead.SplinePosition > car.SplinePosition && carAhead.Lap == car.Lap)
+                        {
+                            float splineDistance = Math.Abs(carAhead.SplinePosition - car.SplinePosition);
+                            float gapFrontMeters = splineDistance * ACCService.Client.MessageHandler.TrackMeters;
+                            car.PositionDelta = $"+{gapFrontMeters / car.Kmh * 3.6:F3}";
+                        } else
+                        {
+                            car.PositionDelta = null;
+                        }
+                    }
+                } else
+                {
+                    car.PositionDelta = null;
                 }
             }
         }
@@ -122,6 +157,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                     focusedCar.SetAsFocusedCar(true);
                 }
             }
+            SessionType = update.SessionType;
         }
 
         private void OnCarClicked(object sender, TappedRoutedEventArgs e)
