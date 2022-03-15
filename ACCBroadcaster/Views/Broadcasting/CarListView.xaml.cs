@@ -88,7 +88,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                     positionChanged = true;
                 }
                 car.Location = carUpdate.CarLocation;
-                car.LapDelta = car.DeltaMsToReadable(carUpdate.Delta);
+                car.LapDelta = car.DeltaMsToReadable(carUpdate.Delta, true);
                 car.CurrentLap = car.LapTimeMsToReadable(carUpdate.CurrentLap.LaptimeMS);
                 car.LastLap = car.LapTimeMsToReadable(carUpdate.LastLap.LaptimeMS);
                 car.BestLap = car.LapTimeMsToReadable(carUpdate.BestSessionLap.LaptimeMS);
@@ -119,7 +119,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                             if (car.BestLapMS > 0)
                             {
                                 int lapDelta = carAhead.BestLapMS - car.BestLapMS;
-                                car.PositionDelta = car.DeltaMsToReadable(lapDelta);
+                                car.PositionDelta = car.DeltaMsToReadable(lapDelta, false);
                             }
                         }
                         else if (carAhead.SplinePosition > car.SplinePosition && carAhead.Lap == car.Lap)

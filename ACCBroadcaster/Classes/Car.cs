@@ -163,10 +163,10 @@ namespace ACCBroadcaster.Classes
                 return $"{TimeSpan.FromMilliseconds((double)laptimeMs):mm\\:ss\\.fff}";
         }
 
-        public string DeltaMsToReadable(int deltaMs)
+        public string DeltaMsToReadable(int deltaMs, bool canBeNegative)
         {
             string posOrNeg;
-            if (deltaMs < 0)
+            if (deltaMs < 0 && canBeNegative)
             {
                 posOrNeg = "-";
             } else
