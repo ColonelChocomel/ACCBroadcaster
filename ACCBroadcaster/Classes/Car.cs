@@ -140,7 +140,15 @@ namespace ACCBroadcaster.Classes
 
         public string DeltaMsToReadable(int deltaMs)
         {
-            return $"{TimeSpan.FromMilliseconds(deltaMs):ss\\.f}";
+            string posOrNeg;
+            if (deltaMs < 0)
+            {
+                posOrNeg = "-";
+            } else
+            {
+                posOrNeg = "+";
+            }
+            return (posOrNeg + $"{TimeSpan.FromMilliseconds(deltaMs):ss\\.fff}");
         }
 
         public void SetAsFocusedCar(bool isFocused)
