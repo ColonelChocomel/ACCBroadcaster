@@ -15,6 +15,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Broadcasting:CarListView Grid.Column="0"></Broadcasting:CarListView>
-        <Broadcasting:HUDSelectorView Grid.Column="1"></Broadcasting:HUDSelectorView>
+        <StackPanel Grid.Column="1">
+            <Broadcasting:HUDSelectorView></Broadcasting:HUDSelectorView>
+            <Broadcasting:CameraSelectorView></Broadcasting:CameraSelectorView>
+        </StackPanel>
     </Grid>
 </Page>
