@@ -18,6 +18,7 @@
         <StackPanel Grid.Column="1">
             <Broadcasting:HUDSelectorView></Broadcasting:HUDSelectorView>
             <Broadcasting:CameraSelectorView></Broadcasting:CameraSelectorView>
+            <Broadcasting:InstantReplayView></Broadcasting:InstantReplayView>
         </StackPanel>
     </Grid>
 </Page>

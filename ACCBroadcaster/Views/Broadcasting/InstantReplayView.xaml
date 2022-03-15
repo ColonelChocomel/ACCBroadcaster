@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="ACCBroadcaster.Views.Broadcasting.InstantReplayView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACCBroadcaster.Views.Broadcasting"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5">
+            <TextBlock FontSize="15" FontWeight="Bold">Instant Replay</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="-10s" Click="StartInstantReplay" CommandParameter="10" Margin="5"></Button>
+                <Button Content="-20s" Click="StartInstantReplay" CommandParameter="20" Margin="5"></Button>
+                <Button Content="-30s" Click="StartInstantReplay" CommandParameter="30" Margin="5"></Button>
+            </StackPanel>
+            <TextBlock>Custom length:</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <NumberBox x:Name="CustomLengthNumberBox"
+                Value="5"
+                SpinButtonPlacementMode="Inline"
+                SmallChange="5"
+                Margin="5"/>
+                <Button Content="Start Custom" Click="StartInstantReplay" Margin="5, 0"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
