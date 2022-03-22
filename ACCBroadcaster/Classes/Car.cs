@@ -1,5 +1,6 @@
 ﻿using ksBroadcastingNetwork;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -120,6 +121,17 @@ namespace ACCBroadcaster.Classes
             }
         }
 
+        private SolidColorBrush _DeltaBrush;
+        public SolidColorBrush DeltaBrush
+        {
+            get { return _DeltaBrush; }
+            set
+            {
+                _DeltaBrush = value;
+                OnPropertyChanged(nameof(DeltaBrush));
+            }
+        }
+
         private bool _IsFocused = false;
         public bool IsFocused
         {
@@ -163,17 +175,25 @@ namespace ACCBroadcaster.Classes
                 return $"{TimeSpan.FromMilliseconds((double)laptimeMs):mm\\:ss\\.fff}";
         }
 
-        public string DeltaMsToReadable(int deltaMs, bool canBeNegative)
+        public void SetLapDelta(int deltaMs)
         {
             string posOrNeg;
-            if (deltaMs < 0 && canBeNegative)
+            if (deltaMs < 0)
             {
                 posOrNeg = "-";
-            } else
+                this.DeltaBrush = new SolidColorBrush(Colors.DarkGreen);
+            }
+            else
             {
                 posOrNeg = "+";
+                this.DeltaBrush = new SolidColorBrush(Colors.Red);
             }
-            return (posOrNeg + $"{TimeSpan.FromMilliseconds(deltaMs):ss\\.fff}");
+            this.LapDelta = (posOrNeg + $"{TimeSpan.FromMilliseconds(deltaMs):s\\,fff}");
+        }
+
+        public void SetPositionDelta(int deltaMs)
+        {
+            this.PositionDelta = $"+{TimeSpan.FromMilliseconds(deltaMs):s\\,fff}";
         }
 
         public void SetAsFocusedCar(bool isFocused)
@@ -181,7 +201,7 @@ namespace ACCBroadcaster.Classes
             IsFocused = isFocused;
             if (isFocused)
             {
-                BackgroundBrush = new SolidColorBrush(Microsoft.UI.Colors.Red);
+                BackgroundBrush = new SolidColorBrush(Colors.DodgerBlue);
             } else
             {
                 BackgroundBrush = null;
