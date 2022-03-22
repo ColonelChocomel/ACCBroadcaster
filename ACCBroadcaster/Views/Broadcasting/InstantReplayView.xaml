@@ -11,10 +11,10 @@
     <Grid>
         <StackPanel Orientation="Vertical" Margin="5">
             <TextBlock FontSize="15" FontWeight="Bold">Instant Replay</TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="-10s" Click="StartInstantReplay" CommandParameter="10" Margin="5"></Button>
-                <Button Content="-20s" Click="StartInstantReplay" CommandParameter="20" Margin="5"></Button>
-                <Button Content="-30s" Click="StartInstantReplay" CommandParameter="30" Margin="5"></Button>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Content="-10s" Click="StartInstantReplay" CommandParameter="10" Margin="5" Background="{ThemeResource ButtonBackgroundThemeBrush}"></Button>
+                <Button Content="-20s" Click="StartInstantReplay" CommandParameter="20" Margin="5" Background="{ThemeResource ButtonBackgroundThemeBrush}"></Button>
+                <Button Content="-30s" Click="StartInstantReplay" CommandParameter="30" Margin="5" Background="{ThemeResource ButtonBackgroundThemeBrush}"></Button>
             </StackPanel>
             <TextBlock>Custom length:</TextBlock>
             <StackPanel Orientation="Horizontal">
@@ -22,8 +22,8 @@
                 Value="5"
                 SpinButtonPlacementMode="Inline"
                 SmallChange="5"
-                Margin="5"/>
-                <Button Content="Start Custom" Click="StartInstantReplay" Margin="5, 0"></Button>
+                Margin="10"/>
+                <Button Content="Start Custom" Click="StartInstantReplay" Background="{ThemeResource ButtonBackgroundThemeBrush}"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

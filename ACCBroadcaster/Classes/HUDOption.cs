@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,7 +46,7 @@ namespace ACCBroadcaster.Classes
             IsActive = isActive;
             if (isActive)
             {
-                BackgroundBrush = new SolidColorBrush(Microsoft.UI.Colors.Red);
+                BackgroundBrush = new SolidColorBrush(Colors.DodgerBlue);
             }
             else
             {

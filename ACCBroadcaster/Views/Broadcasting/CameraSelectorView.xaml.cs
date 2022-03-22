@@ -1,5 +1,6 @@
 ﻿using ACCBroadcaster.Classes;
 using ksBroadcastingNetwork.Structs;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -160,7 +161,7 @@ namespace ACCBroadcaster.Views.Broadcasting
             if (IsActive)
             {
                 OnboardIsActive = true;
-                OnboardsComboBox.Background = new SolidColorBrush(Microsoft.UI.Colors.Red);
+                OnboardsComboBox.Background = new SolidColorBrush(Colors.DodgerBlue);
             } else
             {
                 OnboardIsActive = false;
@@ -173,7 +174,7 @@ namespace ACCBroadcaster.Views.Broadcasting
             if (IsActive)
             {
                 DrivableIsActive = true;
-                DrivableComboBox.Background = new SolidColorBrush(Microsoft.UI.Colors.Red);
+                DrivableComboBox.Background = new SolidColorBrush(Colors.DodgerBlue);
             }
             else
             {

@@ -14,6 +14,11 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
+        <Style x:Key="DeltaTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
     </Page.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -33,7 +38,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="classes:Car">
                         <StackPanel Orientation="Horizontal" Background="{Binding BackgroundBrush, Mode=OneWay}">
-                            <TextBlock Text="{Binding PositionDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="90"/>
+                            <TextBlock Text="{Binding PositionDelta, Mode=OneWay}" Style="{StaticResource DeltaTextStyle}" Width="90"/>
                             <TextBlock Text="{Binding Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="40"/>
                             <TextBlock Text="{Binding RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
                             <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>
