@@ -121,7 +121,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                     {
                         if (SessionType != RaceSessionType.Race)
                         {
-                            if (car.BestLapMS > 0)
+                            if (carUpdate.BestSessionLap.LaptimeMS > 0)
                             {
                                 int lapDelta = carAhead.BestLapMS - car.BestLapMS;
                                 car.SetPositionDelta(lapDelta);
