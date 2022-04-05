@@ -35,21 +35,7 @@ namespace ACCBroadcaster.Views.Broadcasting
 
         public CameraSelectorView()
         {
-            Cameras.Add(new Camera("TV Set 1", "set1"));
-            Cameras.Add(new Camera("TV Set 2", "set2"));
-            Cameras.Add(new Camera("Helicam", "Helicam"));
-            Cameras.Add(new Camera("Pitlane", "pitlane"));
-            OnboardCameras.Add(new Camera("Cockpit", "Onboard0"));
-            OnboardCameras.Add(new Camera("Driver", "Onboard1"));
-            OnboardCameras.Add(new Camera("Dashboard", "Onboard2"));
-            OnboardCameras.Add(new Camera("Rear", "Onboard3"));
-            DrivableCameras.Add(new Camera("Chase", "Chase"));
-            DrivableCameras.Add(new Camera("Far Chase", "FarChase"));
-            DrivableCameras.Add(new Camera("Bonnet", "Bonnet"));
-            DrivableCameras.Add(new Camera("Dash Pro", "DashPro"));
-            DrivableCameras.Add(new Camera("Cockpit", "Cockpit"));
-            DrivableCameras.Add(new Camera("Dash", "Dash"));
-            DrivableCameras.Add(new Camera("Helmet", "Helmet"));
+            CreateCameras();
             ACCService.Client.MessageHandler.OnRealtimeUpdate += OnRealtimeUpdate;
             this.InitializeComponent();
         }
@@ -181,6 +167,25 @@ namespace ACCBroadcaster.Views.Broadcasting
                 DrivableIsActive = false;
                 DrivableComboBox.Background = null;
             }
+        }
+
+        private void CreateCameras()
+        {
+            Cameras.Add(new Camera("TV Set 1", "set1"));
+            Cameras.Add(new Camera("TV Set 2", "set2"));
+            Cameras.Add(new Camera("Helicam", "Helicam"));
+            Cameras.Add(new Camera("Pitlane", "pitlane"));
+            OnboardCameras.Add(new Camera("Cockpit", "Onboard0"));
+            OnboardCameras.Add(new Camera("Driver", "Onboard1"));
+            OnboardCameras.Add(new Camera("Dashboard", "Onboard2"));
+            OnboardCameras.Add(new Camera("Rear", "Onboard3"));
+            DrivableCameras.Add(new Camera("Chase", "Chase"));
+            DrivableCameras.Add(new Camera("Far Chase", "FarChase"));
+            DrivableCameras.Add(new Camera("Bonnet", "Bonnet"));
+            DrivableCameras.Add(new Camera("Dash Pro", "DashPro"));
+            DrivableCameras.Add(new Camera("Cockpit", "Cockpit"));
+            DrivableCameras.Add(new Camera("Dash", "Dash"));
+            DrivableCameras.Add(new Camera("Helmet", "Helmet"));
         }
     }
 }

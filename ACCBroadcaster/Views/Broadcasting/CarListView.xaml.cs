@@ -28,10 +28,15 @@ namespace ACCBroadcaster.Views.Broadcasting
     public sealed partial class CarListView : Page
     {
         private ObservableCollection<Car> Cars = new ObservableCollection<Car>();
+        private ObservableCollection<Camera> Cameras = new ObservableCollection<Camera>();
+        private ObservableCollection<Camera> OnboardCameras = new ObservableCollection<Camera>();
+        private ObservableCollection<Camera> DrivableCameras = new ObservableCollection<Camera>();
         private RaceSessionType SessionType;
         public CarListView()
         {
             this.InitializeComponent();
+            CreateCameras();
+            CreateCarContextFlyout();
             ACCService.Client.MessageHandler.OnEntrylistUpdate += OnEntrylistUpdate;
             ACCService.Client.MessageHandler.OnRealtimeCarUpdate += OnRealtimeCarUpdate;
             ACCService.Client.MessageHandler.OnRealtimeUpdate += OnRealtimeUpdate;
@@ -168,6 +173,76 @@ namespace ACCBroadcaster.Views.Broadcasting
             TextBlock textBlock = (TextBlock)e.OriginalSource;
             Car car = (Car)textBlock.DataContext;
             ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index);
+        }
+
+        private void CreateCameras()
+        {
+            Cameras.Add(new Camera("TV Set 1", "set1"));
+            Cameras.Add(new Camera("TV Set 2", "set2"));
+            Cameras.Add(new Camera("Helicam", "Helicam"));
+            Cameras.Add(new Camera("Pitlane", "pitlane"));
+            OnboardCameras.Add(new Camera("Cockpit", "Onboard0"));
+            OnboardCameras.Add(new Camera("Driver", "Onboard1"));
+            OnboardCameras.Add(new Camera("Dashboard", "Onboard2"));
+            OnboardCameras.Add(new Camera("Rear", "Onboard3"));
+            DrivableCameras.Add(new Camera("Chase", "Chase"));
+            DrivableCameras.Add(new Camera("Far Chase", "FarChase"));
+            DrivableCameras.Add(new Camera("Bonnet", "Bonnet"));
+            DrivableCameras.Add(new Camera("Dash Pro", "DashPro"));
+            DrivableCameras.Add(new Camera("Cockpit", "Cockpit"));
+            DrivableCameras.Add(new Camera("Dash", "Dash"));
+            DrivableCameras.Add(new Camera("Helmet", "Helmet"));
+        }
+
+        private void CreateCarContextFlyout()
+        {
+            foreach (Camera camera in Cameras)
+            {
+                MenuFlyoutItem item = new MenuFlyoutItem();
+                item.Text = camera.DisplayName;
+                item.Name = camera.InternalName;
+                item.Click += OnCarContextClicked;
+                CarContextFlyout.Items.Add(item);
+            }
+
+            foreach (Camera camera in OnboardCameras)
+            {
+                MenuFlyoutItem item = new MenuFlyoutItem();
+                item.Text = camera.DisplayName;
+                item.Name = camera.InternalName;
+                item.Click += OnCarContextOnboardClicked;
+                OnboardContextFlyout.Items.Add(item);
+            }
+
+            foreach (Camera camera in DrivableCameras)
+            {
+                MenuFlyoutItem item = new MenuFlyoutItem();
+                item.Text = camera.DisplayName;
+                item.Name = camera.InternalName;
+                item.Click += OnCarContextDrivableClicked;
+                DrivableContextFlyout.Items.Add(item);
+            }
+        }
+
+        private void OnCarContextClicked(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            Car car = (Car)item.DataContext;
+            ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, item.Name, "default");
+        }
+
+        private void OnCarContextOnboardClicked(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            Car car = (Car)item.DataContext;
+            ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, "Onboard", item.Name);
+        }
+
+        private void OnCarContextDrivableClicked(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            Car car = (Car)item.DataContext;
+            ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, "Drivable", item.Name);
         }
     }
 }
