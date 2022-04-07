@@ -60,14 +60,14 @@ namespace ACCBroadcaster.Classes
             }
         }
 
-        private string _PositionDelta;
-        public string PositionDelta
+        private string _Interval;
+        public string Interval
         {
-            get { return _PositionDelta; }
+            get { return _Interval; }
             set
             {
-                _PositionDelta = value;
-                OnPropertyChanged(nameof(PositionDelta));
+                _Interval = value;
+                OnPropertyChanged(nameof(Interval));
             }
         }
 
@@ -191,9 +191,9 @@ namespace ACCBroadcaster.Classes
             this.LapDelta = (posOrNeg + $"{TimeSpan.FromMilliseconds(deltaMs):s\\,fff}");
         }
 
-        public void SetPositionDelta(int deltaMs)
+        public void SetInterval(int deltaMs)
         {
-            this.PositionDelta = $"+{TimeSpan.FromMilliseconds(deltaMs):s\\,fff}";
+            this.Interval = $"+{TimeSpan.FromMilliseconds(deltaMs):s\\,fff}";
         }
 
         public void SetAsFocusedCar(bool isFocused)

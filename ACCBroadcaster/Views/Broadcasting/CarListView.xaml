@@ -34,7 +34,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource TextStyle}" Width="90">Delta</TextBlock>
+                <TextBlock Style="{StaticResource TextStyle}" Width="90">Interval</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="40">Pos</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="40">#</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="250">Driver</TextBlock>
@@ -49,7 +49,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="classes:Car">
                         <StackPanel Orientation="Horizontal" Background="{Binding BackgroundBrush, Mode=OneWay}" ContextFlyout="{StaticResource CarContextFlyout}">
-                            <TextBlock Text="{Binding PositionDelta, Mode=OneWay}" Style="{StaticResource DeltaTextStyle}" Width="90"/>
+                            <TextBlock Text="{Binding Interval, Mode=OneWay}" Style="{StaticResource DeltaTextStyle}" Width="90"/>
                             <TextBlock Text="{Binding Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="40"/>
                             <TextBlock Text="{Binding RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
                             <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>

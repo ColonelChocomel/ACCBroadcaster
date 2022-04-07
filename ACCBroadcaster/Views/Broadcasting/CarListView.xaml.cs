@@ -126,25 +126,25 @@ namespace ACCBroadcaster.Views.Broadcasting
                             if (carUpdate.BestSessionLap.LaptimeMS > 0)
                             {
                                 int lapDelta = carAhead.BestLapMS - car.BestLapMS;
-                                car.SetPositionDelta(lapDelta);
+                                car.SetInterval(lapDelta);
                             } else
                             {
-                                car.PositionDelta = null;
+                                car.Interval = null;
                             }
                         }
                         else if (carAhead.SplinePosition > car.SplinePosition && carAhead.Lap == car.Lap)
                         {
                             float splineDistance = Math.Abs(carAhead.SplinePosition - car.SplinePosition);
                             float gapFrontMeters = splineDistance * ACCService.Client.MessageHandler.TrackMeters;
-                            car.PositionDelta = $"+{gapFrontMeters / car.Kmh * 3.6:F3}";
+                            car.Interval = $"+{gapFrontMeters / car.Kmh * 3.6:F3}";
                         } else
                         {
-                            car.PositionDelta = null;
+                            car.Interval = null;
                         }
                     }
                 } else
                 {
-                    car.PositionDelta = null;
+                    car.Interval = null;
                 }
             }
         }
