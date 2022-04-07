@@ -35,10 +35,10 @@ namespace ACCBroadcaster.Views.Broadcasting
         private void StartInstantReplay(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            float length = 0;
+            float length;
             if (button.CommandParameter == null)
             {
-                length = (float)CustomLengthNumberBox.Value;
+                length = ACCService.CustomReplayLength;
             } else
             {
                 length = (float)Convert.ToDouble(button.CommandParameter);
@@ -50,6 +50,11 @@ namespace ACCBroadcaster.Views.Broadcasting
         private void OnRealtimeUpdate(string sender, RealtimeUpdate update)
         {
             CurrentSessionTime = Convert.ToInt32(update.SessionTime.TotalMilliseconds);
+        }
+
+        private void CustomLengthNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            ACCService.CustomReplayLength = (int)sender.Value;
         }
     }
 }

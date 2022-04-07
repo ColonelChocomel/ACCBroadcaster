@@ -32,6 +32,8 @@ namespace ACCBroadcaster.Views.Broadcasting
         private ObservableCollection<Camera> OnboardCameras = new ObservableCollection<Camera>();
         private ObservableCollection<Camera> DrivableCameras = new ObservableCollection<Camera>();
         private RaceSessionType SessionType;
+        private float CurrentSessionTime = 0;
+
         public CarListView()
         {
             this.InitializeComponent();
@@ -166,6 +168,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                 }
             }
             SessionType = update.SessionType;
+            CurrentSessionTime = Convert.ToInt32(update.SessionTime.TotalMilliseconds);
         }
 
         private void OnCarClicked(object sender, TappedRoutedEventArgs e)
@@ -243,6 +246,23 @@ namespace ACCBroadcaster.Views.Broadcasting
             MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
             Car car = (Car)item.DataContext;
             ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, "Drivable", item.Name);
+        }
+
+        private void OnCarContextReplayClicked(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            Car car = (Car)item.DataContext;
+            float length;
+            if (item.Name == "Custom")
+            {
+                length = ACCService.CustomReplayLength;
+            }
+            else
+            {
+                length = (float)Convert.ToDouble(item.CommandParameter);
+            }
+            float requestedStartTime = CurrentSessionTime - (length * 1000);
+            ACCService.Client.MessageHandler.RequestInstantReplay(requestedStartTime, length * 1000.0f, car.Index);
         }
     }
 }

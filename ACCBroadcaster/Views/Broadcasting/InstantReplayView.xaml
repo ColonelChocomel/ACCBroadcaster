@@ -22,7 +22,9 @@
                 Value="5"
                 SpinButtonPlacementMode="Inline"
                 SmallChange="5"
-                Margin="10"/>
+                Margin="10"
+                Minimum="1"
+                ValueChanged="CustomLengthNumberBox_ValueChanged"/>
                 <Button Content="Start Custom" Click="StartInstantReplay" Background="{ThemeResource ButtonBackgroundThemeBrush}"></Button>
             </StackPanel>
         </StackPanel>

@@ -11,5 +11,6 @@ namespace ACCBroadcaster.Classes
     public static class ACCService
     {
         public static ACCUdpRemoteClient Client;
+        public static int CustomReplayLength = 5;
     }
 }

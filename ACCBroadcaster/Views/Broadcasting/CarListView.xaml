@@ -20,12 +20,14 @@
             <Setter Property="Foreground" Value="Red"/>
         </Style>
         <MenuFlyout x:Name="CarContextFlyout" x:Key="CarContextFlyout">
-            <MenuFlyoutSubItem x:Name="OnboardContextFlyout" Text="Onboards">
-                
+            <MenuFlyoutSubItem x:Name="ReplayContextFlyout" Text="Instant Replay">
+                <MenuFlyoutItem CommandParameter="10" Text="-10s" Click="OnCarContextReplayClicked"/>
+                <MenuFlyoutItem CommandParameter="20" Text="-20s" Click="OnCarContextReplayClicked"/>
+                <MenuFlyoutItem CommandParameter="30" Text="-30s" Click="OnCarContextReplayClicked"/>
+                <MenuFlyoutItem Name="Custom" Text="Custom length" Click="OnCarContextReplayClicked"/>
             </MenuFlyoutSubItem>
-            <MenuFlyoutSubItem x:Name="DrivableContextFlyout" Text="Drivable">
-
-            </MenuFlyoutSubItem>
+            <MenuFlyoutSubItem x:Name="OnboardContextFlyout" Text="Onboards"/>
+            <MenuFlyoutSubItem x:Name="DrivableContextFlyout" Text="Drivable"/>
         </MenuFlyout>
     </Page.Resources>
 
