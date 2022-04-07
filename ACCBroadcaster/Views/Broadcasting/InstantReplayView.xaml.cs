@@ -50,6 +50,13 @@ namespace ACCBroadcaster.Views.Broadcasting
         private void OnRealtimeUpdate(string sender, RealtimeUpdate update)
         {
             CurrentSessionTime = Convert.ToInt32(update.SessionTime.TotalMilliseconds);
+            if (update.IsReplayPlaying)
+            {
+                ReplayTimeRemaining.Text = $"Replay time remaining: {TimeSpan.FromMilliseconds(update.ReplayRemainingTime).Seconds}s";
+            } else
+            {
+                ReplayTimeRemaining.Text = null;
+            }
         }
 
         private void CustomLengthNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)

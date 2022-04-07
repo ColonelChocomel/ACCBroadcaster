@@ -27,6 +27,7 @@
                 ValueChanged="CustomLengthNumberBox_ValueChanged"/>
                 <Button Content="Start Custom" Click="StartInstantReplay" Background="{ThemeResource ButtonBackgroundThemeBrush}"></Button>
             </StackPanel>
+            <TextBlock Name="ReplayTimeRemaining" FontWeight="Bold"/>
         </StackPanel>
     </Grid>
 </Page>
