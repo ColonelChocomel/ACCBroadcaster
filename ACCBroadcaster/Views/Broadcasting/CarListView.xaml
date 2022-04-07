@@ -43,6 +43,7 @@
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Current</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Last</TextBlock>
                 <TextBlock Style="{StaticResource TextStyle}" Width="100">Best</TextBlock>
+                <SymbolIcon Symbol="Help" ToolTipService.ToolTip="Left click to change focused car. Right click to change focused car and camera, or start a replay for selected car." Width="40"></SymbolIcon>
             </StackPanel>
             <ItemsControl Name="CarLV" ItemsSource="{Binding Cars}" IsTapEnabled="True" Tapped="OnCarClicked">
                 <ItemsControl.ItemTemplate>
