@@ -29,39 +29,47 @@
             <MenuFlyoutSubItem x:Name="OnboardContextFlyout" Text="Onboards"/>
             <MenuFlyoutSubItem x:Name="DrivableContextFlyout" Text="Drivable"/>
         </MenuFlyout>
+        <ControlTemplate x:Name="CarPositionTemplate" TargetType="Button">
+            <Button Grid.Row="0" Grid.Column="0" CornerRadius="20" VerticalAlignment="Top" Width="50" Background="White" Foreground="Black">
+                <ContentPresenter Content="{TemplateBinding Content}"/>
+            </Button>
+        </ControlTemplate>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource TextStyle}" Width="90">Interval</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="40">Pos</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="40">#</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="250">Driver</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="85">Location</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="93">Lap Delta</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="100">Current</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="100">Last</TextBlock>
-                <TextBlock Style="{StaticResource TextStyle}" Width="100">Best</TextBlock>
-                <SymbolIcon Symbol="Help" ToolTipService.ToolTip="Left click to change focused car. Right click to change focused car and camera, or start a replay for selected car." Width="40"></SymbolIcon>
+    <Grid Name="Grid">
+        <Border Name="TrackPositionLine" Grid.Row="0" Grid.Column="0" Height="Auto" BorderThickness="4 0 4 0" BorderBrush="Gray" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        <ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="50,0">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextStyle}" Width="90">Interval</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="40">Pos</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="40">#</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="250">Driver</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="85">Location</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="93">Lap Delta</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="100">Current</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="100">Last</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="100">Best</TextBlock>
+                    <SymbolIcon Symbol="Help" ToolTipService.ToolTip="Left click to change focused car. Right click to change focused car and camera, or start a replay for selected car." Width="40"></SymbolIcon>
+                </StackPanel>
+                <ItemsControl Name="CarLV" ItemsSource="{Binding Cars}" IsTapEnabled="True" Tapped="OnCarClicked">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="classes:Car">
+                            <StackPanel Orientation="Horizontal" Background="{Binding BackgroundBrush, Mode=OneWay}" ContextFlyout="{StaticResource CarContextFlyout}">
+                                <TextBlock Text="{Binding Interval, Mode=OneWay}" Style="{StaticResource DeltaTextStyle}" Width="90"/>
+                                <TextBlock Text="{Binding Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="40"/>
+                                <TextBlock Text="{Binding RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
+                                <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>
+                                <TextBlock Text="{Binding Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="85"/>
+                                <TextBlock Text="{Binding LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding DeltaBrush, Mode=OneWay}" Width="93"/>
+                                <TextBlock Text="{Binding CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                                <TextBlock Text="{Binding LastLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                                <TextBlock Text="{Binding BestLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
-            <ItemsControl Name="CarLV" ItemsSource="{Binding Cars}" IsTapEnabled="True" Tapped="OnCarClicked">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="classes:Car">
-                        <StackPanel Orientation="Horizontal" Background="{Binding BackgroundBrush, Mode=OneWay}" ContextFlyout="{StaticResource CarContextFlyout}">
-                            <TextBlock Text="{Binding Interval, Mode=OneWay}" Style="{StaticResource DeltaTextStyle}" Width="90"/>
-                            <TextBlock Text="{Binding Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="40"/>
-                            <TextBlock Text="{Binding RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
-                            <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>
-                            <TextBlock Text="{Binding Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="85"/>
-                            <TextBlock Text="{Binding LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding DeltaBrush, Mode=OneWay}" Width="93"/>
-                            <TextBlock Text="{Binding CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
-                            <TextBlock Text="{Binding LastLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
-                            <TextBlock Text="{Binding BestLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </Page>

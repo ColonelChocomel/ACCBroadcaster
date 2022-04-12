@@ -33,6 +33,7 @@ namespace ACCBroadcaster.Views.Broadcasting
         private ObservableCollection<Camera> DrivableCameras = new ObservableCollection<Camera>();
         private RaceSessionType SessionType;
         private float CurrentSessionTime = 0;
+        private List<Button> CarPositionButtons = new List<Button>();
 
         public CarListView()
         {
@@ -61,6 +62,12 @@ namespace ACCBroadcaster.Views.Broadcasting
                         Location = CarLocationEnum.Pitlane,
                     };
                     Cars.Add(car);
+                    Button button = new Button();
+                    button.Template = CarPositionTemplate;
+                    button.CommandParameter = car.Index.ToString();
+                    button.Content = car.RaceNumber.ToString();
+                    Grid.Children.Add(button);
+                    CarPositionButtons.Add(button);
                 }
                 else
                 {
@@ -79,6 +86,12 @@ namespace ACCBroadcaster.Views.Broadcasting
                     Location = CarLocationEnum.Pitlane,
                 };
                 Cars.Add(car);
+                Button button = new Button();
+                button.Template = CarPositionTemplate;
+                button.CommandParameter = car.Index.ToString();
+                button.Content = car.RaceNumber.ToString();
+                Grid.Children.Add(button);
+                CarPositionButtons.Add(button);
             }
         }
 
@@ -146,6 +159,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                 {
                     car.Interval = null;
                 }
+                MoveCarButton(car);
             }
         }
 
@@ -263,6 +277,17 @@ namespace ACCBroadcaster.Views.Broadcasting
             }
             float requestedStartTime = CurrentSessionTime - (length * 1000);
             ACCService.Client.MessageHandler.RequestInstantReplay(requestedStartTime, length * 1000.0f, car.Index);
+        }
+
+        private void MoveCarButton(Car car)
+        {
+            Button button = CarPositionButtons.FirstOrDefault(x => int.Parse(x.CommandParameter.ToString()) == car.Index);
+            if (button != null)
+            {
+                double position = car.SplinePosition * TrackPositionLine.ActualHeight * 2;
+                position -= TrackPositionLine.ActualHeight;
+                button.Margin = new Thickness(0, 0, 0, position);
+            }
         }
     }
 }
