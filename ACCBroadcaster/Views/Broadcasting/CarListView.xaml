@@ -30,12 +30,12 @@
             <MenuFlyoutSubItem x:Name="DrivableContextFlyout" Text="Drivable"/>
         </MenuFlyout>
         <ControlTemplate x:Name="CarPositionTemplate" TargetType="Button">
-            <Button Grid.Row="0" Grid.Column="0" CornerRadius="20" VerticalAlignment="Top" Width="55" Background="DarkGray" Foreground="Black">
+            <Button Grid.Row="0" Grid.Column="0" CornerRadius="20" VerticalAlignment="Top" Width="55" Background="DarkGray" Foreground="Black" Click="CarPostionButtonClicked" CommandParameter="{TemplateBinding CommandParameter}">
                 <ContentPresenter Content="{TemplateBinding Content}"/>
             </Button>
         </ControlTemplate>
         <ControlTemplate x:Name="FocusedCarPositionTemplate" TargetType="Button">
-            <Button Grid.Row="0" Grid.Column="0" CornerRadius="20" VerticalAlignment="Top" Width="55" Background="DodgerBlue" Foreground="Black">
+            <Button Grid.Row="0" Grid.Column="0" CornerRadius="20" VerticalAlignment="Top" Width="55" Background="DodgerBlue" Foreground="Black" Click="CarPostionButtonClicked" CommandParameter="{TemplateBinding CommandParameter}">
                 <ContentPresenter Content="{TemplateBinding Content}"/>
             </Button>
         </ControlTemplate>

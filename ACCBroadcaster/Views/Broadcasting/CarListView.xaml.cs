@@ -184,7 +184,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                     }
                 } else
                 {
-                    focusedCar.SetAsFocusedCar(true);
+                    SetAsFocusedCar(focusedCar, true);
                 }
             }
             SessionType = update.SessionType;
@@ -249,28 +249,28 @@ namespace ACCBroadcaster.Views.Broadcasting
 
         private void OnCarContextClicked(object sender, RoutedEventArgs e)
         {
-            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            MenuFlyoutItem item = (MenuFlyoutItem)sender;
             Car car = (Car)item.DataContext;
             ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, item.Name, "default");
         }
 
         private void OnCarContextOnboardClicked(object sender, RoutedEventArgs e)
         {
-            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            MenuFlyoutItem item = (MenuFlyoutItem)sender;
             Car car = (Car)item.DataContext;
             ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, "Onboard", item.Name);
         }
 
         private void OnCarContextDrivableClicked(object sender, RoutedEventArgs e)
         {
-            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            MenuFlyoutItem item = (MenuFlyoutItem)sender;
             Car car = (Car)item.DataContext;
             ACCService.Client.MessageHandler.SetFocus((UInt16)car.Index, "Drivable", item.Name);
         }
 
         private void OnCarContextReplayClicked(object sender, RoutedEventArgs e)
         {
-            MenuFlyoutItem item = (MenuFlyoutItem)e.OriginalSource;
+            MenuFlyoutItem item = (MenuFlyoutItem)sender;
             Car car = (Car)item.DataContext;
             float length;
             if (item.Name == "Custom")
@@ -307,6 +307,13 @@ namespace ACCBroadcaster.Views.Broadcasting
             {
                 button.Template = CarPositionTemplate;
             }
+        }
+
+        private void CarPostionButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int carIndex = (int)button.CommandParameter;
+            ACCService.Client.MessageHandler.SetFocus((UInt16)carIndex);
         }
     }
 }
