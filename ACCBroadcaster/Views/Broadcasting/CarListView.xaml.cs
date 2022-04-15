@@ -1,6 +1,7 @@
 ﻿using ACCBroadcaster.Classes;
 using ksBroadcastingNetwork;
 using ksBroadcastingNetwork.Structs;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -64,8 +65,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                     Cars.Add(car);
                     Button button = new Button();
                     button.Template = CarPositionTemplate;
-                    button.CommandParameter = car.Index.ToString();
-                    button.Content = car.RaceNumber.ToString();
+                    button.CommandParameter = car.Index;
+                    button.Content = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
                     Grid.Children.Add(button);
                     CarPositionButtons.Add(button);
                 }
@@ -74,6 +75,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                     car.RaceNumber = carUpdate.RaceNumber;
                     car.DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName;
                     car.Location = CarLocationEnum.Pitlane;
+                    Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
+                    button.Content = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
                 }
             }
             else
@@ -88,8 +91,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                 Cars.Add(car);
                 Button button = new Button();
                 button.Template = CarPositionTemplate;
-                button.CommandParameter = car.Index.ToString();
-                button.Content = car.RaceNumber.ToString();
+                button.CommandParameter = car.Index;
+                button.Content = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
                 Grid.Children.Add(button);
                 CarPositionButtons.Add(button);
             }
@@ -173,8 +176,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                 {
                     if (previousFocusedCar.Index != focusedCar.Index)
                     {
-                        focusedCar.SetAsFocusedCar(true);
-                        previousFocusedCar.SetAsFocusedCar(false);
+                        SetAsFocusedCar(focusedCar, true);
+                        SetAsFocusedCar(previousFocusedCar, false);
                     }
                 } else
                 {
@@ -281,12 +284,25 @@ namespace ACCBroadcaster.Views.Broadcasting
 
         private void MoveCarButton(Car car)
         {
-            Button button = CarPositionButtons.FirstOrDefault(x => int.Parse(x.CommandParameter.ToString()) == car.Index);
+            Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
             if (button != null)
             {
                 double position = car.SplinePosition * TrackPositionLine.ActualHeight * 2;
                 position -= TrackPositionLine.ActualHeight;
                 button.Margin = new Thickness(0, 0, 0, position);
+            }
+        }
+
+        private void SetAsFocusedCar (Car car, bool isFocused)
+        {
+            car.SetAsFocusedCar(isFocused);
+            Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
+            if (isFocused)
+            {
+                button.Template = FocusedCarPositionTemplate;
+            } else
+            {
+                button.Template = CarPositionTemplate;
             }
         }
     }
