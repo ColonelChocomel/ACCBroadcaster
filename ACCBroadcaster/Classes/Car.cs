@@ -38,6 +38,17 @@ namespace ACCBroadcaster.Classes
             }
         }
 
+        private string _ShortName;
+        public string ShortName
+        {
+            get { return _ShortName; }
+            set
+            {
+                _ShortName = value;
+                OnPropertyChanged(nameof(ShortName));
+            }
+        }
+
         private CarLocationEnum _Location;
         public CarLocationEnum Location
         {

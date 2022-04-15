@@ -43,12 +43,13 @@
 
     <Grid Name="Grid">
         <Border Name="TrackPositionLine" Grid.Row="0" Grid.Column="0" Height="Auto" BorderThickness="5 0 5 0" BorderBrush="Gray" HorizontalAlignment="Left" Margin="23,20,0,20"/>
-        <ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="60,0">
+        <ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="60,0,10,0">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TextStyle}" Width="90">Interval</TextBlock>
                     <TextBlock Style="{StaticResource TextStyle}" Width="40">Pos</TextBlock>
                     <TextBlock Style="{StaticResource TextStyle}" Width="40">#</TextBlock>
+                    <TextBlock Style="{StaticResource TextStyle}" Width="55">TLA</TextBlock>
                     <TextBlock Style="{StaticResource TextStyle}" Width="250">Driver</TextBlock>
                     <TextBlock Style="{StaticResource TextStyle}" Width="85">Location</TextBlock>
                     <TextBlock Style="{StaticResource TextStyle}" Width="93">Lap Delta</TextBlock>
@@ -64,6 +65,7 @@
                                 <TextBlock Text="{Binding Interval, Mode=OneWay}" Style="{StaticResource DeltaTextStyle}" Width="90"/>
                                 <TextBlock Text="{Binding Position, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="40"/>
                                 <TextBlock Text="{Binding RaceNumber}" Style="{StaticResource TextStyle}" Width="40"/>
+                                <TextBlock Text="{Binding ShortName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="55"/>
                                 <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>
                                 <TextBlock Text="{Binding Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="85"/>
                                 <TextBlock Text="{Binding LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding DeltaBrush, Mode=OneWay}" Width="93"/>

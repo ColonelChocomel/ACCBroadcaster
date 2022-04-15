@@ -61,12 +61,13 @@ namespace ACCBroadcaster.Views.Broadcasting
                         RaceNumber = carUpdate.RaceNumber,
                         DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
                         Location = CarLocationEnum.Pitlane,
+                        ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName
                     };
                     Cars.Add(car);
                     Button button = new Button();
                     button.Template = CarPositionTemplate;
                     button.CommandParameter = car.Index;
-                    button.Content = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
+                    button.Content = car.ShortName;
                     Grid.Children.Add(button);
                     CarPositionButtons.Add(button);
                 }
@@ -75,8 +76,9 @@ namespace ACCBroadcaster.Views.Broadcasting
                     car.RaceNumber = carUpdate.RaceNumber;
                     car.DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName;
                     car.Location = CarLocationEnum.Pitlane;
+                    car.ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
                     Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
-                    button.Content = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
+                    button.Content = car.ShortName;
                 }
             }
             else
@@ -87,12 +89,13 @@ namespace ACCBroadcaster.Views.Broadcasting
                     RaceNumber = carUpdate.RaceNumber,
                     DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
                     Location = CarLocationEnum.Pitlane,
+                    ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName
                 };
                 Cars.Add(car);
                 Button button = new Button();
                 button.Template = CarPositionTemplate;
                 button.CommandParameter = car.Index;
-                button.Content = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
+                button.Content = car.ShortName;
                 Grid.Children.Add(button);
                 CarPositionButtons.Add(button);
             }
