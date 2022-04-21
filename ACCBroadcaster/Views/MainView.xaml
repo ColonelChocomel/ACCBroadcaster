@@ -11,12 +11,13 @@
     <Grid>
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontSize="32">ACC Broadcaster</TextBlock>
-            <TextBox Name="IP" Header="IP" Text="127.0.0.1"></TextBox>
-            <NumberBox Name="Port" Header="Port" Value="9000"></NumberBox>
-            <TextBox Name="DisplayName" Header="Display Name" Text="Your name"></TextBox>
-            <PasswordBox Name="ConnectionPW" Header="Connection password" Password="asd"></PasswordBox>
-            <NumberBox Name="UpdateInterval" Header="Update interval (ms)" Value="250"></NumberBox>
-            <PasswordBox Name="CommandPW" Header="Command password" Password=""></PasswordBox>
+            <TextBox Name="IP" Header="IP" Text="127.0.0.1"/>
+            <NumberBox Name="Port" Header="Port" Value="9000"/>
+            <TextBox Name="DisplayName" Header="Display Name"/>
+            <PasswordBox Name="ConnectionPW" Header="Connection password"/>
+            <NumberBox Name="UpdateInterval" Header="Update interval (ms)" Value="250"/>
+            <PasswordBox Name="CommandPW" Header="Command password"/>
+            <CheckBox Content="Remember login" Name="RememberLogin"/>
             <Button x:Name="myButton" Click="myButton_Click">Connect</Button>
             <TextBlock Name="ErrorTextBlock"></TextBlock>
         </StackPanel>

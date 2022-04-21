@@ -16,6 +16,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using ACCBroadcaster.Properties;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,6 +31,15 @@ namespace ACCBroadcaster.Views
         public MainView()
         {
             this.InitializeComponent();
+            if (Settings.Default.LoginRemembered)
+            {
+                IP.Text = Settings.Default.IP;
+                Port.Value = Settings.Default.Port;
+                DisplayName.Text = Settings.Default.DisplayName;
+                ConnectionPW.Password = Settings.Default.ConnectionPw;
+                CommandPW.Password = Settings.Default.CommandPw;
+                UpdateInterval.Value = Settings.Default.UpdateInterval;
+            }
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +50,17 @@ namespace ACCBroadcaster.Views
             string connectionPw = ConnectionPW.Password;
             string commandPw = CommandPW.Password;
             int updateInterval = (int)UpdateInterval.Value;
+            if ((bool)RememberLogin.IsChecked)
+            {
+                Settings.Default.IP = ip;
+                Settings.Default.Port = port;
+                Settings.Default.DisplayName = displayName;
+                Settings.Default.ConnectionPw = connectionPw;
+                Settings.Default.CommandPw = commandPw;
+                Settings.Default.UpdateInterval = updateInterval;
+                Settings.Default.LoginRemembered = true;
+                Settings.Default.Save();
+            }
             ACCService.Client = new ACCUdpRemoteClient(ip, port, displayName, connectionPw, commandPw, updateInterval);
             ACCService.Client.MessageHandler.OnConnectionStateChanged += OnConnect;
         }
