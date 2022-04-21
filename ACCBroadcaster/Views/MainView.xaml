@@ -21,5 +21,13 @@
             <Button x:Name="myButton" Click="myButton_Click">Connect</Button>
             <TextBlock Name="ErrorTextBlock"></TextBlock>
         </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <TextBlock Name="VersionText" Margin="5"/>
+            <TextBlock Margin="5">
+                <Hyperlink NavigateUri="https://github.com/ColonelChocomel/ACCBroadcaster">
+                    GitHub
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
