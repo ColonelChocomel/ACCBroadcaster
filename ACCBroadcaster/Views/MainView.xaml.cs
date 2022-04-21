@@ -41,6 +41,7 @@ namespace ACCBroadcaster.Views
                 ConnectionPW.Password = Settings.Default.ConnectionPw;
                 CommandPW.Password = Settings.Default.CommandPw;
                 UpdateInterval.Value = Settings.Default.UpdateInterval;
+                RememberLogin.IsChecked = true;
             }
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
