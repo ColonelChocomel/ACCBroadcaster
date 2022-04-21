@@ -48,7 +48,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\Program Files (x86)\Steam\steamapps\common\Assetto Corsa Competizione Dedicated Server\sdk\broadcasting\Sources\ksBroadcastingNetwork\ksBroadcastingNetwork.csproj" />
+    <ProjectReference Include="..\ksBroadcastingNetwork\ksBroadcastingNetwork.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">

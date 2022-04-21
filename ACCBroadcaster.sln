@@ -5,7 +5,12 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACCBroadcaster", "ACCBroadcaster\ACCBroadcaster.csproj", "{1A3251E8-5135-45D6-9FB1-F703998C4186}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ksBroadcastingNetwork", "D:\Program Files (x86)\Steam\steamapps\common\Assetto Corsa Competizione Dedicated Server\sdk\broadcasting\Sources\ksBroadcastingNetwork\ksBroadcastingNetwork.csproj", "{1EF9A746-3771-4052-B61B-04BDB3DC381A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ksBroadcastingNetwork", "ksBroadcastingNetwork\ksBroadcastingNetwork.csproj", "{1EF9A746-3771-4052-B61B-04BDB3DC381A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{614CC9F0-4CB1-40A3-9B97-0EF843BC81CC}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
