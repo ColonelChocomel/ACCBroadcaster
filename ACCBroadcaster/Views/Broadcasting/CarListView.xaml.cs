@@ -59,7 +59,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                     {
                         Index = carUpdate.CarIndex,
                         RaceNumber = carUpdate.RaceNumber,
-                        DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
+                        DriverName = $"{carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName} {carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName}",
                         Location = CarLocationEnum.Pitlane,
                         ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName
                     };
@@ -74,7 +74,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                 else
                 {
                     car.RaceNumber = carUpdate.RaceNumber;
-                    car.DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName;
+                    car.DriverName = $"{carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName} {carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName}";
                     car.Location = CarLocationEnum.Pitlane;
                     car.ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
                     Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
@@ -87,7 +87,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                 {
                     Index = carUpdate.CarIndex,
                     RaceNumber = carUpdate.RaceNumber,
-                    DriverName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName + " " + carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName,
+                    DriverName = $"{carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName} {carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName}",
                     Location = CarLocationEnum.Pitlane,
                     ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName
                 };

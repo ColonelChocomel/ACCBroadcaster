@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="ACCBroadcaster.Views.Broadcasting.SessionInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ACCBroadcaster.Views.Broadcasting"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid BorderBrush="{ThemeResource ButtonDisabledBorderThemeBrush}" BorderThickness="1" CornerRadius="5" Margin="6" Width="560" HorizontalAlignment="Left">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock FontSize="15" FontWeight="Bold">Session Info</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="TrackName" Margin="5" FontSize="15"/>
+                    <TextBlock Name="SessionType" Margin="5" FontSize="15"/>
+                    <TextBlock Name="RemainingTime" Margin="5" FontSize="15"/>
+                </StackPanel>
+                <TextBlock FontWeight="Bold">Weather</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="AmbientTemp" Margin="5" FontSize="15"/>
+                    <TextBlock Name="TrackTemp" Margin="5" FontSize="15"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

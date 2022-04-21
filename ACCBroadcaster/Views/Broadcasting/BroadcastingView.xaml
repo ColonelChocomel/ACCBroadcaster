@@ -14,11 +14,12 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Broadcasting:CarListView Grid.Column="0"></Broadcasting:CarListView>
+        <Broadcasting:CarListView Grid.Column="0"/>
         <StackPanel Grid.Column="1">
-            <Broadcasting:HUDSelectorView></Broadcasting:HUDSelectorView>
-            <Broadcasting:CameraSelectorView></Broadcasting:CameraSelectorView>
-            <Broadcasting:InstantReplayView></Broadcasting:InstantReplayView>
+            <Broadcasting:SessionInfoView/>
+            <Broadcasting:HUDSelectorView/>
+            <Broadcasting:CameraSelectorView/>
+            <Broadcasting:InstantReplayView/>
         </StackPanel>
     </Grid>
 </Page>
