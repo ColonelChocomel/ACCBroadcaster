@@ -69,7 +69,7 @@
                                 <TextBlock Text="{Binding DriverName, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="250"/>
                                 <TextBlock Text="{Binding Location, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="85"/>
                                 <TextBlock Text="{Binding LapDelta, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding DeltaBrush, Mode=OneWay}" Width="93"/>
-                                <TextBlock Text="{Binding CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
+                                <TextBlock Text="{Binding CurrentLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Foreground="{Binding CurrentLapBrush, Mode=OneWay}" Width="100"/>
                                 <TextBlock Text="{Binding LastLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
                                 <TextBlock Text="{Binding BestLap, Mode=OneWay}" Style="{StaticResource TextStyle}" Width="100"/>
                             </StackPanel>

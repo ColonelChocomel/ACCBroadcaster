@@ -143,6 +143,17 @@ namespace ACCBroadcaster.Classes
             }
         }
 
+        private SolidColorBrush _CurrentLapBrush;
+        public SolidColorBrush CurrentLapBrush
+        {
+            get { return _CurrentLapBrush; }
+            set
+            {
+                _CurrentLapBrush = value;
+                OnPropertyChanged(nameof(CurrentLapBrush));
+            }
+        }
+
         private bool _IsFocused = false;
         public bool IsFocused
         {

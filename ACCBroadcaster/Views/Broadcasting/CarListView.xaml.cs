@@ -132,6 +132,14 @@ namespace ACCBroadcaster.Views.Broadcasting
                 {
                     car.BestLapMS = (int)carUpdate.BestSessionLap.LaptimeMS;
                 }
+                if (carUpdate.CurrentLap.IsInvalid)
+                {
+                    car.CurrentLapBrush = new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    car.CurrentLapBrush = null;
+                }
                 car.SplinePosition = carUpdate.SplinePosition;
                 car.Kmh = carUpdate.Kmh;
                 car.Lap = carUpdate.Laps;
