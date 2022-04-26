@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Timers;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -36,6 +37,7 @@ namespace ACCBroadcaster.Views.Broadcasting
         private RaceSessionType SessionType;
         private float CurrentSessionTime = 0;
         private List<Button> CarPositionButtons = new List<Button>();
+        private Timer CheckDisconnectsTimer;
 
         public CarListView()
         {
@@ -45,6 +47,10 @@ namespace ACCBroadcaster.Views.Broadcasting
             ACCService.Client.MessageHandler.OnEntrylistUpdate += OnEntrylistUpdate;
             ACCService.Client.MessageHandler.OnRealtimeCarUpdate += OnRealtimeCarUpdate;
             ACCService.Client.MessageHandler.OnRealtimeUpdate += OnRealtimeUpdate;
+            CheckDisconnectsTimer = new Timer(5000);
+            CheckDisconnectsTimer.Elapsed += CheckDisconnects;
+            CheckDisconnectsTimer.AutoReset = true;
+            CheckDisconnectsTimer.Enabled = true;
         }
 
         private void OnEntrylistUpdate(string sender, CarInfo carUpdate)
@@ -62,7 +68,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                         RaceNumber = carUpdate.RaceNumber,
                         DriverName = $"{carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName} {carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName}",
                         Location = CarLocationEnum.Pitlane,
-                        ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName
+                        ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName,
+                        LastUpdated = DateTime.Now
                     };
                     Cars.Add(car);
                     Button button = new Button();
@@ -78,6 +85,7 @@ namespace ACCBroadcaster.Views.Broadcasting
                     car.DriverName = $"{carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName} {carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName}";
                     car.Location = CarLocationEnum.Pitlane;
                     car.ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName;
+                    car.LastUpdated = DateTime.Now;
                     Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
                     button.Content = car.ShortName;
                 }
@@ -90,7 +98,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                     RaceNumber = carUpdate.RaceNumber,
                     DriverName = $"{carUpdate.Drivers[carUpdate.CurrentDriverIndex].FirstName} {carUpdate.Drivers[carUpdate.CurrentDriverIndex].LastName}",
                     Location = CarLocationEnum.Pitlane,
-                    ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName
+                    ShortName = carUpdate.Drivers[carUpdate.CurrentDriverIndex].ShortName,
+                    LastUpdated = DateTime.Now
                 };
                 Cars.Add(car);
                 Button button = new Button();
@@ -128,15 +137,9 @@ namespace ACCBroadcaster.Views.Broadcasting
                 car.Lap = carUpdate.Laps;
                 if (positionChanged)
                 {
-                    Cars = new ObservableCollection<Car>(Cars.OrderBy(x => x.Position));
-                    foreach(Car listedCar in CarLV.Items)
-                    {
-                        // Destroy PropertyChanged on all instances in view list to stop memory clogging up
-                        listedCar.DestroyPropertyChanged();
-                    }
-                    CarLV.ItemsSource = Cars;
+                    SortCars();
                 }
-                if (car.Position != 1)
+                if (car.Position != 1 && car.Position != 99)
                 {
                     Car carAhead = Cars.FirstOrDefault(x => x.Position == (car.Position - 1));
                     if (carAhead != null)
@@ -147,7 +150,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                             {
                                 int lapDelta = carAhead.BestLapMS - car.BestLapMS;
                                 car.SetInterval(lapDelta);
-                            } else
+                            }
+                            else
                             {
                                 car.Interval = null;
                             }
@@ -157,16 +161,20 @@ namespace ACCBroadcaster.Views.Broadcasting
                             float splineDistance = Math.Abs(carAhead.SplinePosition - car.SplinePosition);
                             float gapFrontMeters = splineDistance * ACCService.Client.MessageHandler.TrackMeters;
                             car.Interval = $"+{gapFrontMeters / car.Kmh * 3.6:F3}";
-                        } else
+                        }
+                        else
                         {
                             car.Interval = null;
                         }
                     }
-                } else
+                }
+                else
                 {
                     car.Interval = null;
                 }
                 MoveCarButton(car);
+                car.LastUpdated = DateTime.Now;
+                car.IsConnected = true;
             }
         }
 
@@ -183,7 +191,8 @@ namespace ACCBroadcaster.Views.Broadcasting
                         SetAsFocusedCar(focusedCar, true);
                         SetAsFocusedCar(previousFocusedCar, false);
                     }
-                } else
+                }
+                else
                 {
                     SetAsFocusedCar(focusedCar, true);
                 }
@@ -294,17 +303,19 @@ namespace ACCBroadcaster.Views.Broadcasting
                 double position = car.SplinePosition * TrackPositionLine.ActualHeight * 2;
                 position -= TrackPositionLine.ActualHeight;
                 button.Margin = new Thickness(0, 0, 0, position);
+                button.Visibility = Visibility.Visible;
             }
         }
 
-        private void SetAsFocusedCar (Car car, bool isFocused)
+        private void SetAsFocusedCar(Car car, bool isFocused)
         {
             car.SetAsFocusedCar(isFocused);
             Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
             if (isFocused)
             {
                 button.Template = FocusedCarPositionTemplate;
-            } else
+            }
+            else
             {
                 button.Template = CarPositionTemplate;
             }
@@ -315,6 +326,40 @@ namespace ACCBroadcaster.Views.Broadcasting
             Button button = (Button)sender;
             int carIndex = (int)button.CommandParameter;
             ACCService.Client.MessageHandler.SetFocus((UInt16)carIndex);
+        }
+
+        // Every 5 seconds, check if a car has not recieved updates for more than 5 seconds to detect disconnected cars
+        private void CheckDisconnects(Object source, ElapsedEventArgs e)
+        {
+            foreach (Car car in Cars)
+            {
+                if (car.IsConnected && car.LastUpdated.AddSeconds(5) < DateTime.Now)
+                {
+                    DispatcherQueue.TryEnqueue(() =>
+                    {
+                        car.IsConnected = false;
+                        car.Position = 99;
+                        car.Interval = null;
+                        car.Location = CarLocationEnum.NONE;
+                        car.LapDelta = null;
+                        car.CurrentLap = null;
+                        Button button = CarPositionButtons.FirstOrDefault(x => (int)x.CommandParameter == car.Index);
+                        button.Visibility = Visibility.Collapsed;
+                        SortCars();
+                    });
+                }
+            }
+        }
+
+        private void SortCars()
+        {
+            Cars = new ObservableCollection<Car>(Cars.OrderBy(x => x.Position));
+            foreach (Car listedCar in CarLV.Items)
+            {
+                // Destroy PropertyChanged on all instances in view list to stop memory clogging up
+                listedCar.DestroyPropertyChanged();
+            }
+            CarLV.ItemsSource = Cars;
         }
     }
 }

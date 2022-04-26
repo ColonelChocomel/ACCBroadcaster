@@ -165,6 +165,10 @@ namespace ACCBroadcaster.Classes
             }
         }
 
+        public DateTime LastUpdated;
+
+        public bool IsConnected = true;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
