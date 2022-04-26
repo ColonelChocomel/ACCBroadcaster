@@ -8,7 +8,7 @@ The goal is to provide a free, open source client that is superior to the defaul
 
 ## System requirements
 * Windows 10 version 1809 or later, or Windows 11.
-* WindowsAppRuntime 1.0.2. Included in installer, or download from [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads#windows-app-sdk-10).
+* WindowsAppRuntime 1.0.3. Included in installer, or download from [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads#windows-app-sdk-10).
 
 ## How to use
 1. Download and install the latest release from the [releases page](https://github.com/ColonelChocomel/ACCBroadcaster/releases).
@@ -39,7 +39,7 @@ ACC Broadcaster is currently also not optimised for multi-class sessions. It wil
 ## How to develop
 If you would like to contribute or make your own modifications to ACC Broadcaster, please see the following:
 * To develop WinUI 3 apps, check Microsoft's documentation [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/set-up-your-development-environment?tabs=vs-2022-17-1-a%2Cvs-2022-17-1-b)
-to make sure you have installed the right tools. Also make sure you have installed WindowsAppRuntime 1.0.2 from [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads#windows-app-sdk-10) or your build may not launch.
+to make sure you have installed the right tools. Also make sure you have installed WindowsAppRuntime 1.0.3 from [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads#windows-app-sdk-10) or your build may not launch.
 * In the Visual Studio solution you will find the ksBroadcastingNetwork project which is not included in the repository. This is a library provided by Kunos Simulazioni that handles communication between the 
 broadcasting client and Assetto Corsa Competizione. To acquire this project, download "Assetto Corsa Competizione Dedicated Server" from the tools section on Steam. 
 Then copy the `sdk\broadcasting\Sources\ksBroadcastingNetwork` folder to the root folder of the solution and reload the project.
