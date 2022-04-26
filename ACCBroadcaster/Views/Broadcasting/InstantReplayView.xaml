@@ -19,7 +19,6 @@
             <TextBlock>Custom length:</TextBlock>
             <StackPanel Orientation="Horizontal">
                 <NumberBox x:Name="CustomLengthNumberBox"
-                Value="5"
                 SpinButtonPlacementMode="Inline"
                 SmallChange="5"
                 Margin="10"

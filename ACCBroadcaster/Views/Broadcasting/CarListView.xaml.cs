@@ -17,6 +17,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using ACCBroadcaster.Properties;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -275,7 +276,7 @@ namespace ACCBroadcaster.Views.Broadcasting
             float length;
             if (item.Name == "Custom")
             {
-                length = ACCService.CustomReplayLength;
+                length = Settings.Default.CustomReplayLength;
             }
             else
             {

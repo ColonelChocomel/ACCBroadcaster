@@ -106,5 +106,17 @@ namespace ACCBroadcaster.Properties {
                 this["LoginRemembered"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int CustomReplayLength {
+            get {
+                return ((int)(this["CustomReplayLength"]));
+            }
+            set {
+                this["CustomReplayLength"] = value;
+            }
+        }
     }
 }
