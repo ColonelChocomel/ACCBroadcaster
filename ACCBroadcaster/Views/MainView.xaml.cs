@@ -43,9 +43,8 @@ namespace ACCBroadcaster.Views
                 UpdateInterval.Value = Settings.Default.UpdateInterval;
                 RememberLogin.IsChecked = true;
             }
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-            VersionText.Text = $"Version {fileVersionInfo.FileVersion}";
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            VersionText.Text = $"Version {version.Major}.{version.Minor}.{version.Build}";
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
