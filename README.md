@@ -25,6 +25,8 @@ ACC Broadcaster has the following advantages over the default ACC broadcasting c
 * Display of lap intervals during non-race sessions like Practice and Qualifying.
 * Track position display lets you see exactly where cars are on track.
 * Right click a car to change the focused car and camera angle at the same time, or start an instant replay for the selected car.
+* Disconnected cars are moved to position 99 rather than sticking around in their pre-disconnect position.
+* Invalid current laps are highlighted in red.
 
 ## Missing features 
 The following features are currently missing compared to the default client and may or may not be added in the future.
@@ -34,7 +36,7 @@ The following features are currently missing compared to the default client and 
 
 ACC Broadcaster is currently also not optimised for multi-class sessions. It will work, however there are no specific tweaks for it like display of position in class.
 
-## How to code
+## How to develop
 If you would like to contribute or make your own modifications to ACC Broadcaster, please see the following:
 * To develop WinUI 3 apps, check Microsoft's documentation [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/set-up-your-development-environment?tabs=vs-2022-17-1-a%2Cvs-2022-17-1-b)
 to make sure you have installed the right tools. Also make sure you have installed WindowsAppRuntime 1.0.2 from [here](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads#windows-app-sdk-10) or your build may not launch.
