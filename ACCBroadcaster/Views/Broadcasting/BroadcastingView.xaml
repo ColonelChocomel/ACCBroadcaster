@@ -16,6 +16,7 @@
         </Grid.ColumnDefinitions>
         <Broadcasting:CarListView Grid.Column="0"/>
         <StackPanel Grid.Column="1">
+            <Broadcasting:ConnectionManageView/>
             <Broadcasting:SessionInfoView/>
             <Broadcasting:HUDSelectorView/>
             <Broadcasting:CameraSelectorView/>

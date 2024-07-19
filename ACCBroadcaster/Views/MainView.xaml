@@ -11,17 +11,28 @@
     <Grid>
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontSize="32">ACC Broadcaster</TextBlock>
-            <TextBox Name="IP" Header="IP" Text="127.0.0.1"/>
-            <NumberBox Name="Port" Header="Port" Value="9000"/>
-            <TextBox Name="DisplayName" Header="Display Name"/>
-            <PasswordBox Name="ConnectionPW" Header="Connection password"/>
-            <NumberBox Name="UpdateInterval" Header="Update interval (ms)" Value="250"/>
-            <PasswordBox Name="CommandPW" Header="Command password"/>
-            <CheckBox Content="Remember login" Name="RememberLogin"/>
-            <Button x:Name="myButton" Click="myButton_Click">Connect</Button>
-            <TextBlock Name="ErrorTextBlock"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="IP" Header="IP" Text="127.0.0.1" Width="150" Margin="10, 10"/>
+                <NumberBox Name="Port" Header="Port" Value="9000" Width="150" Margin="10, 10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="DisplayName" Header="Display Name" Width="150" Margin="10, 10"/>
+                <PasswordBox Name="ConnectionPW" Header="Connection password" Width="150" Margin="10, 10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <NumberBox Name="UpdateInterval" Header="Update interval (ms)" Value="250" Width="150" Margin="10, 10"/>
+                <PasswordBox Name="CommandPW" Header="Command password" Width="150" Margin="10, 10"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="Remember login" Name="RememberLogin" Width="150" Margin="10, 10"/>
+                <Button x:Name="myButton" Click="myButton_Click" Width="320" Margin="10, 10">Connect</Button>
+                <TextBlock Name="ErrorTextBlock" Foreground="Red"></TextBlock>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 40">
+            <ComboBox Name="SelectedTheme" ItemsSource="{x:Bind themeOptions}" DisplayMemberPath="Title" SelectionChanged="ThemeSelectionChanged"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <TextBlock Name="VersionText" Margin="5"/>
             <TextBlock Margin="5">
                 <Hyperlink NavigateUri="https://github.com/ColonelChocomel/ACCBroadcaster">

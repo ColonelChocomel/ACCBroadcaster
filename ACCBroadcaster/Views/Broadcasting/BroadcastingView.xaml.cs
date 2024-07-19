@@ -13,6 +13,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using ACCBroadcaster.Classes;
+using ACCBroadcaster.Properties;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,6 +28,19 @@ namespace ACCBroadcaster.Views.Broadcasting
         public BroadcastingView()
         {
             this.InitializeComponent();
+
+            if (Settings.Default.Theme == "dark")
+            {
+                this.RequestedTheme = ElementTheme.Dark;
+            }
+            else if (Settings.Default.Theme == "light")
+            {
+                this.RequestedTheme = ElementTheme.Light;
+            }
+            else
+            {
+                this.RequestedTheme = ElementTheme.Default;
+            }
         }
     }
 }

@@ -11,12 +11,13 @@
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\Broadcasting\BroadcastingView.xaml" />
     <None Remove="Views\Broadcasting\CameraSelectorView.xaml" />
     <None Remove="Views\Broadcasting\CarListView.xaml" />
+    <None Remove="Views\Broadcasting\ConnectionManageView.xaml" />
     <None Remove="Views\Broadcasting\HUDSelectorView.xaml" />
     <None Remove="Views\Broadcasting\InstantReplayView.xaml" />
     <None Remove="Views\Broadcasting\SessionInfoView.xaml" />
@@ -63,6 +64,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\Broadcasting\ConnectionManageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Views\Broadcasting\SessionInfoView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

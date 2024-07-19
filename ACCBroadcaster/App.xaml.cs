@@ -1,5 +1,7 @@
-﻿using ACCBroadcaster.Views;
+﻿using ACCBroadcaster.Properties;
+using ACCBroadcaster.Views;
 using ACCBroadcaster.Views.Broadcasting;
+using ksBroadcastingNetwork.Structs;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -63,6 +65,20 @@ namespace ACCBroadcaster
                 // parameter
                 rootFrame.Navigate(typeof(MainView), e.Arguments);
             }
+
+            if (Settings.Default.Theme == "dark")
+            {
+                rootFrame.RequestedTheme = ElementTheme.Dark;
+            }
+            else if (Settings.Default.Theme == "light")
+            {
+                rootFrame.RequestedTheme = ElementTheme.Light;
+            }
+            else
+            {
+                rootFrame.RequestedTheme = ElementTheme.Default;
+            }
+
             m_window.Title = "ACC Broadcaster";
             m_window.Activate();
         }
